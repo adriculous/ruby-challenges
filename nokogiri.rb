@@ -1,7 +1,7 @@
 # We're gonna steal, I mean, scrap some stuff from the Martha Stewart website for sadnwiches. We're going to need the Ruby gem, Nokogiri, to scrap some sandwich recipes for us. Nokogiri ikou! (Let's go Nokogiri!)
 
-require 'nokogiri'
-require 'open-uri'
+require "nokogiri"
+require "open-uri"
 
 # Scrappin' time!
 doc = Nokogiri::HTML(open(“http://www.marthastewart.com/312598/brick-pressed-sandwich”))
