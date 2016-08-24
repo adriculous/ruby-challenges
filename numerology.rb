@@ -1,4 +1,6 @@
-# Numerology app. I'm new to this, since I'm completely unfamiliar with Numerology in itself. Okay, here we go! Ganbarimasu!
+# Numerology app. I'm new to this, since I'm completely unfamiliar with Numerology in itself. Okay, here we go! Ganbarimasu! (powered by Sinatra)
+
+require 'sinatra'
 
 # Okay, let's make up a method for the results!
 def get_birth_num(birthday)
@@ -10,7 +12,6 @@ number = number[0].to_i + number[1].to_i
 
 # if statement if the number is greater than 9; if it is, reduce
      if number > 9
-          number = number.to_s
           number = number[0].to_i + number[1].to_i
      end
      
@@ -43,14 +44,10 @@ def get_message(birth_num)
      end
 end
 
-# Ask the user for his/her birthdate
-puts "Welcome to the Numerology App! Let's start off by giving me your birthdate. Please provide it in MMDDYYYY format. Thank you!"
-birthday = gets
-
-# show the numerology number using method & assign
+# Sinatra methods
+get '/:birthday' do
+birthday = params[:birthday]
 birth_num = get_birth_num(birthday)
-
-# display the correct meaning of the Numerology number using method & assign
 message = get_message(birth_num)
-
-puts message
+     "#{message}"
+end
