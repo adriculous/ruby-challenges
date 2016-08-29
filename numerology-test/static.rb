@@ -1,5 +1,3 @@
-# Numerology app. I'm new to this, since I'm completely unfamiliar with Numerology in itself. Okay, here we go! Ganbarimasu! (powered by Sinatra)
-
 require 'sinatra'
 
 # Okay, let's make up a method for the results!
@@ -45,16 +43,7 @@ def get_message(birth_num)
      end
 end
 
-# Sinatra methods
-
 get '/static' do
 	
 	erb :static
-end
-
-get '/:birthday' do
-birthday = params[:birthday]
-birth_num = get_birth_num(birthday)
-@message = get_message(birth_num)
-     erb :index
 end
