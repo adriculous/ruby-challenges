@@ -47,23 +47,25 @@ end
 
 # Sinatra templating stuff
 
-get '/' do
-  erb :form
-end
-
-post '/' do
-    birthday = params[:birthday]
-    birth_num = get_birth_num(birthday)
-    @message = get_message(birth_num)
-end
-
 get '/static' do
 	erb :static
 end
 
+get '/' do
+  erb :form
+end
+
+def setup_index_view
+     birthday = params[:birthday]
+     birth_num = get_birth_num(birthday)
+     @message = get_message(birth_num)
+          erb :index
+end
+
 get '/:birthday' do
-birthday = params[:birthday]
-birth_num = get_birth_num(birthday)
-@message = get_message(birth_num)
-     erb :index
+     setup_index_view
+end
+
+post '/' do
+     setup_index_view
 end
