@@ -45,10 +45,19 @@ def get_message(birth_num)
      end
 end
 
-# Sinatra methods
+# Sinatra templating stuff
+
+get '/' do
+  erb :form
+end
+
+post '/' do
+    birthday = params[:birthday]
+    birth_num = get_birth_num(birthday)
+    @message = get_message(birth_num)
+end
 
 get '/static' do
-	
 	erb :static
 end
 
