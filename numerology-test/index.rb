@@ -67,5 +67,13 @@ get '/:birthday' do
 end
 
 post '/' do
-     setup_index_view
+     birthday = params[:birthday].gsub("z/z","")
+     birth_num = get_birth_num(birthday)
+     redirect "/message/#{birth_num}"
+end
+
+get '/message/:birth_num' do
+   birth_num = params[:birth_num].to_i
+   @message = get_message(birth_num)
+   erb :index
 end
