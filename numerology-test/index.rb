@@ -48,11 +48,36 @@ end
 # Sinatra templating stuff
 
 get '/static' do
-	erb :static
+     erb :static
+end
+
+get '/:birthday' do
+     setup_index_view
+end
+
+get '/message/:birth_num' do
+   birth_num = params[:birth_num].to_i
+   @message = get_message(birth_num)
+   erb :index
 end
 
 get '/' do
   erb :form
+end
+
+post '/' do
+     setup_index_view
+end
+
+post '/' do
+     birthday = params[:birthday].gsub("-","")
+     if valid_birthday(birthday)
+          birth_num = get_birth_num(birthday)
+          redirect "/message/#{birth_num}"
+     else
+          @error = "Eep!  Your valid birthdate should be in the form of mmddyyy. Try again!"
+          erb :form
+     end
 end
 
 def setup_index_view
@@ -62,18 +87,10 @@ def setup_index_view
           erb :index
 end
 
-get '/:birthday' do
-     setup_index_view
-end
-
-post '/' do
-     birthday = params[:birthday].gsub("z/z","")
-     birth_num = get_birth_num(birthday)
-     redirect "/message/#{birth_num}"
-end
-
-get '/message/:birth_num' do
-   birth_num = params[:birth_num].to_i
-   @message = get_message(birth_num)
-   erb :index
+def valid_birthday(input)
+  if(input.length == 8 && !input.match(/^[0-9]+[0-9]$/).nil?)
+    true
+  else
+    false
+  end
 end
