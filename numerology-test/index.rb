@@ -67,9 +67,6 @@ end
 
 post '/' do
      setup_index_view
-end
-
-post '/' do
      birthday = params[:birthday].gsub("-","")
      if valid_birthday(birthday)
           birth_num = get_birth_num(birthday)
